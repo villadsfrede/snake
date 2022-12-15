@@ -1,18 +1,27 @@
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
-var x = 8;
-var y = 8;
-var gS = 50;
-
-
+var x = 21;
+var y = 21;
+var gS = 20;
 
 window.addEventListener("load", () => {
     canvas.width = x*gS;
     canvas.height = y*gS;
-    block(0,0, "#00acff")
-    block(1,1, "#00ffcc")
+    Snake = new Snake(5)
+    Snake.draw()
 })
+
+class Snake{
+    constructor(length){
+        this.length = length;
+    }
+    draw(){
+        for (let i = 0; i < this.length; i++) {
+            block(i,Math.floor(y-y/2), "#00acff")  
+        }
+    }
+}
 
 function block(x, y, color){
     ctx.beginPath()
@@ -21,3 +30,12 @@ function block(x, y, color){
     ctx.fill()
     ctx.closePath()
 }
+
+document.addEventListener("keydown", (Event) => {
+    if (Event.key == "ArrowLeft") {
+        console.log("left")
+    }
+    if (Event.key == "ArrowRight") {
+        console.log("right")
+    }
+})
